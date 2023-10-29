@@ -57,6 +57,7 @@ class Validator {
     }
   }
 
+
   static String? validateFullName(String value) {
     if (value.isEmpty) {
       return 'This field is required.';

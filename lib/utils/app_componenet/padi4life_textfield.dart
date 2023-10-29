@@ -37,6 +37,8 @@ class Padi4LifeTextFormField extends StatelessWidget {
       onChanged: onChange,
       validator: validator,
       obscureText: obscureText,
+      enabled: enable,
+      autovalidateMode: AutovalidateMode.onUserInteraction,
       decoration: InputDecoration(
         hintText: hintText,
         filled: true,
