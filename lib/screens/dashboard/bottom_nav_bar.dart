@@ -22,7 +22,7 @@ class BottomNavBar extends StatefulHookConsumerWidget {
 class _BottomNavBarState extends ConsumerState<BottomNavBar> {
   List<Widget> screenToShow = [
     const HomeScreen(),
-    const TransactionScreen(),
+    const ActivitiesScreen(),
     const LoanScreen(),
     const AssetTokenScreen(),
     const DashboardScreen(),
