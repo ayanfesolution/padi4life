@@ -4,9 +4,9 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:padi4life/screens/dashboard/asset_token/asset_token_screen.dart';
-import 'package:padi4life/screens/dashboard/dashboard/dashboard_screen.dart';
-import 'package:padi4life/screens/dashboard/loan/wallet_screen.dart';
+import 'package:padi4life/screens/dashboard/p2ploan/p2p_loan.dart';
+import 'package:padi4life/screens/dashboard/invest/invest_screen.dart';
+import 'package:padi4life/screens/dashboard/wallet/wallet_screen.dart';
 import 'package:padi4life/screens/dashboard/transactions/transaction_screen.dart';
 import 'package:padi4life/utils/app_color.dart';
 
@@ -24,8 +24,8 @@ class _BottomNavBarState extends ConsumerState<BottomNavBar> {
     const HomeScreen(),
     const ActivitiesScreen(),
     const WalletScreen(),
-    const AssetTokenScreen(),
-    const DashboardScreen(),
+    const P2PLoanScreen(),
+    const InvestScreen(),
   ];
   @override
   Widget build(BuildContext context) {

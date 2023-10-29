@@ -110,13 +110,14 @@ class Padi4LifeBordedIcoButton extends StatelessWidget {
     this.backGroundColor = kWHTCOLOUR,
     this.boardedColor = kPRYCOLOUR,
     this.height = 62,
+    this.textFont = 20,
     this.width = double.maxFinite,
     this.icon = 'assets/svgs/arrow_forward.svg',
     required this.title,
     required this.onTap,
   });
   final Color backGroundColor, boardedColor;
-  final double width, height;
+  final double width, height, textFont;
   final String icon, title;
   final Function() onTap;
 
@@ -146,7 +147,7 @@ class Padi4LifeBordedIcoButton extends StatelessWidget {
                 title,
                 style: kTextStyleCustom(
                   color: boardedColor,
-                  fontSize: 20,
+                  fontSize: textFont,
                   fontWeight: FontWeight.w400,
                   height: 0,
                 ),
