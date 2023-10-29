@@ -31,7 +31,7 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
     var emailMail = useTextEditingController();
     var password = useTextEditingController();
     var rememberMe = useState(false);
-    var isPasswordVisible = useState(false);
+    var isPasswordVisible = useState(true);
     return Scaffold(
       body: Padded(
         child: Form(
@@ -128,7 +128,7 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
                     width: 238,
                     onTap: () {
                       if (formKey.currentState!.validate()) {
-                        RouteNavigators.route(
+                        RouteNavigators.routeNoWayHome(
                           context,
                           const BottomNavBar(),
                         );
