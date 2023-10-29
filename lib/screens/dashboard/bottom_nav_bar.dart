@@ -6,7 +6,7 @@ import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:padi4life/screens/dashboard/asset_token/asset_token_screen.dart';
 import 'package:padi4life/screens/dashboard/dashboard/dashboard_screen.dart';
-import 'package:padi4life/screens/dashboard/loan/loan_screen.dart';
+import 'package:padi4life/screens/dashboard/loan/wallet_screen.dart';
 import 'package:padi4life/screens/dashboard/transactions/transaction_screen.dart';
 import 'package:padi4life/utils/app_color.dart';
 
@@ -23,7 +23,7 @@ class _BottomNavBarState extends ConsumerState<BottomNavBar> {
   List<Widget> screenToShow = [
     const HomeScreen(),
     const ActivitiesScreen(),
-    const LoanScreen(),
+    const WalletScreen(),
     const AssetTokenScreen(),
     const DashboardScreen(),
   ];

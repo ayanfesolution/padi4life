@@ -44,7 +44,7 @@ class _SplashScreenState extends State<SplashScreen>
       parent: controller,
       curve: Curves.easeOutBack,
     );
-    SizeConfig().init(context, 812, 375);
+    SizeConfig().init(context, 852, 393);
     return Scaffold(
       body: Center(
         child: ScaleTransition(
