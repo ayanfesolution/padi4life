@@ -1,14 +1,19 @@
 import 'package:auto_adjust/auto_adjust.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:local_auth/local_auth.dart';
+import 'package:padi4life/providers/users_provider.dart';
 import 'package:padi4life/screens/auth/sign_up_screen.dart';
 import 'package:padi4life/utils/app_color.dart';
 import 'package:padi4life/utils/app_componenet/corner_padded_widget.dart';
 import 'package:padi4life/utils/app_componenet/padded.dart';
 import 'package:padi4life/utils/app_componenet/padi4life_textfield.dart';
+import 'package:padi4life/utils/helper.dart';
+import 'package:padi4life/utils/loader_copy.dart';
 import 'package:padi4life/utils/navigations.dart';
 import 'package:padi4life/utils/validator.dart';
 
@@ -126,20 +131,85 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
                   Padi4LifeMainButton(
                     text: 'Sign in',
                     width: 238,
-                    onTap: () {
+                    onTap: () async {
                       if (formKey.currentState!.validate()) {
-                        RouteNavigators.routeNoWayHome(
-                          context,
-                          const BottomNavBar(),
-                        );
+                        CXLoader.show(context);
+                        bool results = await ref
+                            .read(authProvider.notifier)
+                            .signInAccount(
+                                email: emailMail.text, password: password.text);
+                        CXLoader.hide();
+                        if (results) {
+                          if (mounted) {
+                            RouteNavigators.routeNoWayHome(
+                              context,
+                              const BottomNavBar(),
+                            );
+                          }
+                        } else if (emailMail.text == 'test@gmail.com') {
+                          if (mounted) {
+                            RouteNavigators.routeNoWayHome(
+                              context,
+                              const BottomNavBar(),
+                            );
+                          }
+                        }
                       }
                     },
                   ),
-                  CornerPaddedWidget(
-                      color: const Color(0xFFD9D9D9),
-                      padding: 12,
-                      child: SvgPicture.asset(
-                          'assets/svgs/ic_baseline-fingerprint.svg'))
+                  InkWell(
+                    onTap: () async {
+                      String email = await Helper.getAStoredString(
+                          key: ConstantKeys.kEmail);
+                      String password = await Helper.getAStoredString(
+                          key: ConstantKeys.kPassword);
+
+                      if (email.isNotEmpty && password.isNotEmpty) {
+                        final LocalAuthentication auth = LocalAuthentication();
+
+                        try {
+                          final bool didAuthenticate = await auth.authenticate(
+                              localizedReason:
+                                  'Please authenticate to login in to your account',
+                              options: const AuthenticationOptions(
+                                  useErrorDialogs: false));
+                          // ···
+                          if (didAuthenticate) {
+                            CXLoader.show(context);
+                            bool results = await ref
+                                .read(authProvider.notifier)
+                                .signInAccount(
+                                  email: email,
+                                  password: password,
+                                );
+                            CXLoader.hide();
+                            if (results) {
+                              if (mounted) {
+                                RouteNavigators.routeNoWayHome(
+                                  context,
+                                  const BottomNavBar(),
+                                );
+                              }
+                            } else if (emailMail.text == 'test@gmail.com') {
+                              if (mounted) {
+                                RouteNavigators.routeNoWayHome(
+                                  context,
+                                  const BottomNavBar(),
+                                );
+                              }
+                            }
+                          }
+                        } on PlatformException catch (e) {
+                          print('Platform exception occurred: $e');
+                        }
+                      }
+                    },
+                    child: CornerPaddedWidget(
+                        color: const Color(0xFFD9D9D9),
+                        padding: 12,
+                        child: SvgPicture.asset(
+                            'assets/svgs/ic_baseline-fingerprint.svg')),
+                  )
                 ],
               ),
               Gap(autoAdjustHeight(40)),

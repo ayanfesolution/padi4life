@@ -1,6 +1,6 @@
 import 'dart:io';
 import 'package:dio/dio.dart';
-import '../../../utils/config.dart';
+import '../../utils/config.dart';
 
 class ApiClient {
   ApiClient(this.dio) {

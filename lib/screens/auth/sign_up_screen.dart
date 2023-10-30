@@ -5,11 +5,14 @@ import 'package:flutter_svg/svg.dart';
 import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:padi4life/screens/auth/registration_successful_pop.dart';
+import 'package:padi4life/screens/auth/sign_in_screen.dart';
 import 'package:padi4life/utils/app_componenet/padded.dart';
 import 'package:padi4life/utils/app_componenet/padi4life_textfield.dart';
 import 'package:padi4life/utils/constants.dart';
+import 'package:padi4life/utils/loader_copy.dart';
 import 'package:padi4life/utils/validator.dart';
 
+import '../../providers/users_provider.dart';
 import '../../utils/app_componenet/padi4life_button.dart';
 import '../../utils/navigations.dart';
 
@@ -136,12 +139,27 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
               Gap(autoAdjustHeight(24)),
               Padi4LifeMainButton(
                 text: 'Sign Up',
-                onTap: () {
+                onTap: () async {
                   if (formKey.currentState!.validate()) {
-                    RouteNavigators.route(
-                      context,
-                      const RegistrationSuccessfulPopUP(),
-                    );
+                    CXLoader.show(context);
+                    bool results =
+                        await ref.read(authProvider.notifier).signUpAccount(
+                              email: emailMail.text,
+                              password: password.text,
+                              firstName: firstName.text,
+                              lastName: lastName.text,
+                              userName: userName.text,
+                              address: address.text,
+                            );
+                    CXLoader.hide();
+                    if (results) {
+                      if (mounted) {
+                        RouteNavigators.route(
+                          context,
+                          const RegistrationSuccessfulPopUP(),
+                        );
+                      }
+                    }
                   }
                 },
               ),
@@ -158,7 +176,7 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
                   ),
                   InkWell(
                     onTap: () {
-                      RouteNavigators.route(context, const SignUpScreen());
+                      RouteNavigators.route(context, const SignInScreen());
                     },
                     child: Text(
                       'Sign In',

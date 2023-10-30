@@ -4,10 +4,12 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:padi4life/providers/users_provider.dart';
 import 'package:padi4life/utils/app_componenet/padded.dart';
 import 'package:padi4life/utils/app_componenet/padi4life_button.dart';
 import 'package:padi4life/utils/constants.dart';
 
+import '../../../../models/user_details_model.dart';
 import '../../../onboarding/onboarding_page.dart';
 
 class WalletSection extends StatefulHookConsumerWidget {
@@ -22,7 +24,7 @@ class _WalletSectionState extends ConsumerState<WalletSection> {
   @override
   Widget build(BuildContext context) {
     var currentIndex = useState(0);
-
+    UserDataDetails userInfo = ref.watch(authProvider);
     return Container(
       height: 330,
       decoration: const BoxDecoration(
@@ -48,7 +50,7 @@ class _WalletSectionState extends ConsumerState<WalletSection> {
               children: [
                 const Icon(Icons.menu),
                 Text(
-                  'Welcome, Damaiu Dalu',
+                  'Welcome, ${userInfo.username}',
                   style: kTextStyleCustom(fontWeight: FontWeight.w300),
                 ),
                 const CircleAvatar(
@@ -192,19 +194,20 @@ class _WalletTypeState extends ConsumerState<WalletType> {
 List<WalletTypeModel> walletTypeList = [
   WalletTypeModel(
       walletTitle: 'Your Personal Pocket',
-      amount: '₦ 895,456.56',
+      amount: '₦ 1,000',
       buttonText1: 'Add Cash',
       buttonText2: 'Send Money'),
   WalletTypeModel(
       walletTitle: 'Your Padicoin Pocket',
-      amount: '56,065 coins',
+      amount: '100 coins',
       buttonText1: 'Earn more',
       buttonText2: 'Convert coins'),
   WalletTypeModel(
-      walletTitle: 'Outstanding Loan',
-      amount: '₦ 95,456.56',
-      buttonText1: 'Check Status',
-      buttonText2: 'Payoff')
+    walletTitle: 'Outstanding Loan',
+    amount: '₦ 0.00',
+    buttonText1: 'Check Status',
+    buttonText2: 'Payoff',
+  )
 ];
 
 class WalletTypeModel {

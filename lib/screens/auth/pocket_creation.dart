@@ -6,10 +6,14 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:padi4life/utils/app_componenet/padded.dart';
 import 'package:padi4life/utils/app_componenet/padi4life_textfield.dart';
 import 'package:padi4life/utils/constants.dart';
+import 'package:padi4life/utils/helper.dart';
 import 'package:padi4life/utils/validator.dart';
 
+import '../../providers/users_provider.dart';
 import '../../utils/app_componenet/padi4life_button.dart';
+import '../../utils/loader_copy.dart';
 import '../../utils/navigations.dart';
+import '../dashboard/bottom_nav_bar.dart';
 import 'validate_bvn.dart';
 
 class PocketCreation extends StatefulHookConsumerWidget {
@@ -24,6 +28,7 @@ class _PocketCreationState extends ConsumerState<PocketCreation> {
   @override
   Widget build(BuildContext context) {
     var bvnController = useTextEditingController();
+    var pinController = useTextEditingController();
     return Scaffold(
       body: Padded(
         child: Form(
@@ -55,17 +60,44 @@ class _PocketCreationState extends ConsumerState<PocketCreation> {
               Padi4LifeTextFormField(
                 controller: bvnController,
                 hintText: 'BVN',
+                keyboardType: TextInputType.number,
                 validator: (value) => Validator.validateBVN(value ?? ''),
+              ),
+              Gap(autoAdjustHeight(24)),
+              Padi4LifeTextFormField(
+                controller: pinController,
+                hintText: '4 Digit PIN',
+                keyboardType: TextInputType.number,
+                validator: (value) => Validator.validatePIN(value ?? ''),
               ),
               Gap(autoAdjustHeight(24)),
               Padi4LifeMainButton(
                 text: 'Verify',
-                onTap: () {
+                onTap: () async {
+                  String userName = await Helper.getAStoredString(
+                    key: ConstantKeys.kUsername,
+                  );
                   if (formKey.currentState!.validate()) {
-                    RouteNavigators.route(
-                      context,
-                      const ValidateBVNScreen(),
-                    );
+                    CXLoader.show(context);
+                    bool results =
+                        await ref.read(authProvider.notifier).createWallet(
+                              pin: pinController.text,
+                              bvn: bvnController.text,
+                              userName: userName,
+                            );
+                    CXLoader.hide();
+                    // if (results) {
+                    if (mounted) {
+                      RouteNavigators.routeNoWayHome(
+                        context,
+                        const BottomNavBar(),
+                      );
+                      //}
+                    }
+                    // RouteNavigators.route(
+                    //   context,
+                    //   const ValidateBVNScreen(),
+                    // );
                   }
                 },
               ),

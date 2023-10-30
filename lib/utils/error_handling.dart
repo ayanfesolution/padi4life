@@ -1,3 +1,5 @@
+// ignore_for_file: deprecated_member_use
+
 import 'dart:io';
 import 'package:dio/dio.dart';
 
@@ -5,23 +7,29 @@ class NetworkExceptions {
   static String getDioException(error) {
     if (error is Exception) {
       try {
-        if (error is DioException) {
-          switch (error.error) {
-            case DioExceptionType.cancel:
+        if (error is DioError) {
+          switch (error.type) {
+            case DioErrorType.cancel:
               return 'Request cancelled';
-            case DioExceptionType.connectionTimeout:
-              return 'Connection timed out!';
-            case DioExceptionType.unknown:
-              return 'Something went wrong!';
-            case DioExceptionType.receiveTimeout:
+
+            case DioErrorType.receiveTimeout:
               return 'Request timed out';
-            case DioExceptionType.values:
-              if (error.response!.data['message'] is List) {
-                return error.response!.data['message'][0];
+            case DioErrorType.badResponse:
+              if (error.response!.data['error'] is List) {
+                return error.response!.data['error'][0];
               }
               return error.response!.data['message'];
-            case DioExceptionType.sendTimeout:
+            case DioErrorType.sendTimeout:
               return 'Request timed out';
+            case DioErrorType.connectionTimeout:
+              return 'Connection timed out!';
+            case DioErrorType.badCertificate:
+              return 'Don\'t have the right authorization';
+
+            case DioErrorType.connectionError:
+              return 'Error in connecting';
+            case DioErrorType.unknown:
+              return 'Something went wrong!';
           }
         } else if (error is SocketException) {
           return 'No internet connection!';
@@ -40,6 +48,5 @@ class NetworkExceptions {
         return 'Unexpected error occured';
       }
     }
-    return '';
   }
 }

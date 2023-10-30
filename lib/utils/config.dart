@@ -1,5 +1,4 @@
-
 class Config {
   static String get baseUrl =>
-      'https://api.jsonserve.com/';
+      'https://padi4life.onrender.com/api/v1/padi4life/user/';
 }

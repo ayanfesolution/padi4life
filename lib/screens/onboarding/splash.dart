@@ -3,7 +3,9 @@ import 'package:auto_adjust/auto_adjust.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:gap/gap.dart';
+import 'package:padi4life/screens/auth/sign_in_screen.dart';
 import 'package:padi4life/utils/constants.dart';
+import 'package:padi4life/utils/helper.dart';
 import 'package:padi4life/utils/navigations.dart';
 
 import '../../utils/app_color.dart';
@@ -26,10 +28,16 @@ class _SplashScreenState extends State<SplashScreen>
   }
 
   Future<Timer> initialAction() async {
+    bool isItNotFirstTimeUser = await Helper.checkIfItsFirstLaunch();
     return Timer(
       const Duration(seconds: 4),
       () {
-        RouteNavigators.routeReplace(context, const OnboardingScreen());
+        RouteNavigators.routeReplace(
+          context,
+          isItNotFirstTimeUser
+              ? const SignInScreen()
+              : const OnboardingScreen(),
+        );
       },
     );
   }

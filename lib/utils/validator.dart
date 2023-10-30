@@ -47,6 +47,14 @@ class Validator {
     }
   }
 
+  static String? validatePIN(String value) {
+    if (value.length != 4) {
+      return 'BVN is invalid';
+    } else {
+      return null;
+    }
+  }
+
   static String? validatePhoneNumber(String value) {
     if (value.isEmpty) {
       return 'This field is required.';
@@ -56,7 +64,6 @@ class Validator {
       return null;
     }
   }
-
 
   static String? validateFullName(String value) {
     if (value.isEmpty) {

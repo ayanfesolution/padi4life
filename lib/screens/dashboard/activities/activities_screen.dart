@@ -149,8 +149,14 @@ class _ActivitiesScreenState extends ConsumerState<ActivitiesScreen> {
                       ],
                     ),
                   ),
-                  Gap(autoAdjustHeight(31)),
-                  for (var i = 0; i < 10; i++) const SinglePostWidget(),
+                  Gap(autoAdjustHeight(24)),
+                  for (var i = 0; i < 10; i++)
+                    Padding(
+                      padding: EdgeInsets.only(
+                          top: autoAdjustHeight(10),
+                          bottom: autoAdjustHeight(10)),
+                      child: const SinglePostWidget(),
+                    ),
                 ],
               ),
             ),
@@ -165,7 +171,6 @@ class SinglePostWidget extends StatelessWidget {
   const SinglePostWidget({
     super.key,
   });
-  
 
   @override
   Widget build(BuildContext context) {
@@ -274,7 +279,7 @@ class SinglePostWidget extends StatelessWidget {
                       gradient: LinearGradient(
                         end: Alignment(1.00, -0.003),
                         begin: Alignment(-1, 0.28),
-                        colors: [Color(0xFF4B010E), Color(0x004B010E)],
+                        colors: [Color(0xFF4B010E), Color(0xFF4B010E)],
                       ),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.only(

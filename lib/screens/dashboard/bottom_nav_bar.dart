@@ -7,7 +7,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:padi4life/screens/dashboard/p2ploan/p2p_loan.dart';
 import 'package:padi4life/screens/dashboard/invest/invest_screen.dart';
 import 'package:padi4life/screens/dashboard/wallet/wallet_screen.dart';
-import 'package:padi4life/screens/dashboard/transactions/transaction_screen.dart';
+import 'package:padi4life/screens/dashboard/activities/activities_screen.dart';
 import 'package:padi4life/utils/app_color.dart';
 
 import 'home/home_screen.dart';

@@ -37,6 +37,7 @@ class Padi4LifeTextFormField extends StatelessWidget {
       onChanged: onChange,
       validator: validator,
       obscureText: obscureText,
+      keyboardType: keyboardType,
       enabled: enable,
       autovalidateMode: AutovalidateMode.onUserInteraction,
       decoration: InputDecoration(
@@ -44,7 +45,7 @@ class Padi4LifeTextFormField extends StatelessWidget {
         filled: true,
         fillColor: Colors.black.withOpacity(0.05000000074505806),
         hintStyle: kTextStyleCustom(
-          fontSize: 10,
+          fontSize: 16,
           fontWeight: FontWeight.w500,
           color: const Color(0xFF818181),
         ),
