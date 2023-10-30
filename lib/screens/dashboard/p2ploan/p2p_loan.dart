@@ -5,6 +5,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:padi4life/utils/app_color.dart';
+import 'package:padi4life/utils/app_componenet/coming_soon.dart';
 import 'package:padi4life/utils/app_componenet/corner_padded_widget.dart';
 import 'package:padi4life/utils/app_componenet/padded.dart';
 import 'package:padi4life/utils/app_componenet/padi4life_button.dart';
@@ -401,7 +402,14 @@ class LoanOffersWidget extends StatelessWidget {
                   width: isItBorrow ? 69 : 61,
                   height: 40,
                   text: isItBorrow ? 'Borrow' : 'Lend',
-                  onTap: () {},
+                  onTap: () {
+                    showDialog(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return const ComingSoonPopup();
+                      },
+                    );
+                  },
                 ),
               ],
             ),

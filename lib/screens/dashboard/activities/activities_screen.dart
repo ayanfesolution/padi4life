@@ -8,6 +8,7 @@ import 'package:padi4life/utils/app_componenet/padded.dart';
 import 'package:padi4life/utils/app_componenet/padi4life_button.dart';
 import 'package:padi4life/utils/constants.dart';
 
+import '../../../utils/app_componenet/coming_soon.dart';
 import '../../onboarding/onboarding_page.dart';
 
 class ActivitiesScreen extends StatefulHookConsumerWidget {
@@ -40,12 +41,43 @@ class _ActivitiesScreenState extends ConsumerState<ActivitiesScreen> {
                       Image.asset('assets/images/Padi4LifeLogo.png'),
                       Row(
                         children: [
-                          SvgPicture.asset('assets/svgs/searchIcon.svg'),
+                          InkWell(
+                              onTap: () {
+                                showDialog(
+                                  context: context,
+                                  builder: (BuildContext context) {
+                                    return const ComingSoonPopup();
+                                  },
+                                );
+                              },
+                              child: SvgPicture.asset(
+                                  'assets/svgs/searchIcon.svg')),
                           Gap(autoAdjustWidth(12)),
-                          SvgPicture.asset(
-                              'assets/svgs/noNotificationBell.svg'),
+                          InkWell(
+                            onTap: () {
+                              showDialog(
+                                context: context,
+                                builder: (BuildContext context) {
+                                  return const ComingSoonPopup();
+                                },
+                              );
+                            },
+                            child: SvgPicture.asset(
+                                'assets/svgs/noNotificationBell.svg'),
+                          ),
                           Gap(autoAdjustWidth(12)),
-                          SvgPicture.asset('assets/svgs/emailIcon.svg'),
+                          InkWell(
+                            onTap: () {
+                              showDialog(
+                                context: context,
+                                builder: (BuildContext context) {
+                                  return const ComingSoonPopup();
+                                },
+                              );
+                            },
+                            child:
+                                SvgPicture.asset('assets/svgs/emailIcon.svg'),
+                          ),
                         ],
                       ),
                     ],
@@ -141,7 +173,14 @@ class _ActivitiesScreenState extends ConsumerState<ActivitiesScreen> {
                               width: 59,
                               height: 40,
                               text: 'Post',
-                              onTap: () {},
+                              onTap: () {
+                                showDialog(
+                                  context: context,
+                                  builder: (BuildContext context) {
+                                    return const ComingSoonPopup();
+                                  },
+                                );
+                              },
                             ),
                           ],
                         ),

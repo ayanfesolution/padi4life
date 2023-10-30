@@ -5,6 +5,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:padi4life/screens/dashboard/home/resources/recent_activity.dart';
 import 'package:padi4life/screens/dashboard/home/resources/wallet_section.dart';
+import 'package:padi4life/utils/app_componenet/coming_soon.dart';
 
 import 'package:padi4life/utils/constants.dart';
 
@@ -74,17 +75,27 @@ class Activity extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Container(
-          padding: EdgeInsets.all(autoAdjustHeight(15)),
-          clipBehavior: Clip.antiAlias,
-          decoration: ShapeDecoration(
-            color: Color(color),
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(autoAdjustHeight(10)),
+        InkWell(
+          onTap: () {
+            showDialog(
+              context: context,
+              builder: (BuildContext context) {
+                return const ComingSoonPopup();
+              },
+            );
+          },
+          child: Container(
+            padding: EdgeInsets.all(autoAdjustHeight(15)),
+            clipBehavior: Clip.antiAlias,
+            decoration: ShapeDecoration(
+              color: Color(color),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(autoAdjustHeight(10)),
+              ),
             ),
-          ),
-          child: SvgPicture.asset(
-            'assets/svgs/$image',
+            child: SvgPicture.asset(
+              'assets/svgs/$image',
+            ),
           ),
         ),
         const SizedBox(

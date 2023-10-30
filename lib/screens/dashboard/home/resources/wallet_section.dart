@@ -5,6 +5,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:padi4life/providers/users_provider.dart';
+import 'package:padi4life/utils/app_componenet/coming_soon.dart';
 import 'package:padi4life/utils/app_componenet/padded.dart';
 import 'package:padi4life/utils/app_componenet/padi4life_button.dart';
 import 'package:padi4life/utils/constants.dart';
@@ -48,9 +49,19 @@ class _WalletSectionState extends ConsumerState<WalletSection> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                const Icon(Icons.menu),
+                InkWell(
+                  onTap: () {
+                    showDialog(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return const ComingSoonPopup();
+                      },
+                    );
+                  },
+                  child: const Icon(Icons.menu),
+                ),
                 Text(
-                  'Welcome, ${userInfo.username}',
+                  'Welcome, ${userInfo.username ?? 'Mick'}',
                   style: kTextStyleCustom(fontWeight: FontWeight.w300),
                 ),
                 const CircleAvatar(
@@ -169,7 +180,14 @@ class _WalletTypeState extends ConsumerState<WalletType> {
           children: [
             Padi4LifeMainButton(
               text: widget.buttonText1,
-              onTap: () {},
+              onTap: () {
+                showDialog(
+                  context: context,
+                  builder: (BuildContext context) {
+                    return const ComingSoonPopup();
+                  },
+                );
+              },
               width: 115,
               cornerRadius: 10,
               height: 35,
@@ -179,7 +197,14 @@ class _WalletTypeState extends ConsumerState<WalletType> {
             ),
             Padi4LifeMainButton(
               text: widget.buttonText2,
-              onTap: () {},
+              onTap: () {
+                showDialog(
+                  context: context,
+                  builder: (BuildContext context) {
+                    return const ComingSoonPopup();
+                  },
+                );
+              },
               width: 115,
               cornerRadius: 10,
               height: 35,
